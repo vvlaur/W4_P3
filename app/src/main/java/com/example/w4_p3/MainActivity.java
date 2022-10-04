@@ -93,11 +93,12 @@ public class MainActivity extends AppCompatActivity {
             double changed = Math.abs(accelCurrentValue - accelPreviousValue);
             accelPreviousValue= accelCurrentValue;
 
+
             double x_change = Math.abs(x - xprev);
             xprev = x;
             double y_change = Math.abs(y - yprev);
             yprev = y;
-            double z_change = Math.abs(y - zprev);
+            double z_change = Math.abs(z - zprev);
             zprev = z;
 
             largest_changed = getMaxAxis(x_change, y_change, z_change);
@@ -114,6 +115,14 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Movement on the Z axis", Toast.LENGTH_LONG).show();
                 Log.i("z","Change in Z axis");
                 showWebViewURL(largest_changed);
+            }
+            if (changed > 30) {
+                WebSettings websettings = webx.getSettings();
+                websettings.setJavaScriptEnabled(true);
+                websettings.setLoadsImagesAutomatically(true);
+                webx.setWebViewClient(new WebViewClient());
+                webx.loadUrl("https://jumpingjaxfitness.files.wordpress.com/2010/07/dizziness.jpg");
+
             }
         }
 
